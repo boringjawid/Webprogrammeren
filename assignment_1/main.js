@@ -1,12 +1,18 @@
 var path = window.location.pathname;
 let page = path.split("/").pop();
-console.log(page);
 
-if (page === 'index.html')  {
-// Changes the value within title tag
+function nameToIndex() {
+// Sets the title to Index
   document.getElementsByTagName('title')[0].innerText = "Webprogramming (LIX018P05) - Index";
+}
 
-// Adds a new article
+function nameToSecond() {
+// Sets the title to Second
+  document.getElementsByTagName("title")[0].innerText = "Webprogramming (LIX018P05) - Second";
+}
+
+function addNewArticle() {
+  // Adds a new article
   let container = document.querySelector('.container');
   let article = document.createElement('article');
   let h1 = document.createElement('h1');
@@ -16,8 +22,9 @@ if (page === 'index.html')  {
   article.appendChild(h1);
   article.appendChild(p);
   container.appendChild(article);
+}
 
-  // Loop through the object and create HTML elements for each week and assignment
+function addSchedule() {
   let wpList = {
     'Week 1': 'Assignment 1',
     'Week 2': 'Assignment 1',
@@ -26,57 +33,68 @@ if (page === 'index.html')  {
     'Week 5': 'Assignment 3',
     'Week 6': 'Assignment 3',
     'Week 7': 'Final Project'
-  };
-
+  }
   for (const [week, assignment] of Object.entries(wpList)) {
-  // Create a div element for the week and assignment
+  // Adds the schedule
+    let container = document.querySelector('.container');
     const div = document.createElement('div');
     div.innerHTML = `<strong>${week}:</strong> ${assignment}`;
-
-  // Add the div element to the container
     container.appendChild(div);
   }
+}
 
+function createLinks() {
+  // Changes the value of href attribute for all <a> elements inside <li> inside <div> with id="links" and opens the links in a new tab
+  const links = document.querySelectorAll('#links a');
+  for (let i = 0; i < links.length; i++) {
+  const link = links[i];
+  link.setAttribute('href', 'https://google.com');
+  link.setAttribute('target', '_blank');
+  }
+}
 
-} else {
-  document.getElementsByTagName("title")[0].innerText = "Webprogramming (LIX018P05) - Second";
-  
-  // Get the main column element and change its class
+function colorToRed() {
+  // Get all elements with class 'nav-item' and set the text color to red
+  const navItems = document.querySelectorAll('.nav-item a');
+  for (let i = 0; i < navItems.length; i++) {
+  navItems[i].style.color = 'red';
+  }
+}
+
+function addSideBar() {
+  // Resize the main column and add a sidebar
   const mainColumn = document.querySelector('.col-md-12');
   mainColumn.classList.remove('col-md-12');
   mainColumn.classList.add('col-md-8');
 
-  // Create a new div element for the sidebar
   const sidebarColumn = document.createElement('div');
   sidebarColumn.classList.add('col-md-4');
 
-  // Create a heading for the sidebar
   const sidebarHeading = document.createElement('h2');
   sidebarHeading.textContent = 'Sidebar';
 
-  // Append the sidebar heading to the new div element
   sidebarColumn.appendChild(sidebarHeading);
 
-  // Insert the new sidebar column after the main column
   mainColumn.parentNode.insertBefore(sidebarColumn, mainColumn.nextSibling);
-  
-  }
-
-
-// Changes the value of href attribute for all <a> elements inside <li> inside <div> with id="links" and opens the links in a new tab
-const links = document.querySelectorAll('#links a');
-for (let i = 0; i < links.length; i++) {
-  const link = links[i];
-  link.setAttribute('href', 'https://google.com');
-  link.setAttribute('target', '_blank');
 }
 
-// Selects all elements with the class "nav-item" and changes the text color of these elements to red
-// Get all elements with class 'nav-item'
-const navItems = document.querySelectorAll('.nav-item a');
-for (let i = 0; i < navItems.length; i++) {
-  navItems[i].style.color = 'red';
+
+if (page === 'index.html')  {
+  nameToIndex();
+  addNewArticle();
+  addSchedule();
+  createLinks();
+  colorToRed();
+} else {
+  nameToSecond();
+  createLinks();
+  colorToRed();
+  addSideBar();
 }
+
+
+
+
 
 
 
