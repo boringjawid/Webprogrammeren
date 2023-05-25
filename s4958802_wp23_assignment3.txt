@@ -1,0 +1,2 @@
+https://github.com/boringjawid/Webprogrammeren-Answers.git
+git@github.com:boringjawid/Webprogrammeren-Answers.git
